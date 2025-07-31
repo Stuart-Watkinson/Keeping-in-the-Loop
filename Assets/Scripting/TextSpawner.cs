@@ -40,12 +40,11 @@ public class TextSpawner : MonoBehaviour
             m_timerTest = 0;
             m_currentScreenText.Clear();
         }
-        StartCoroutine(SpawnTimer());
+        StartCoroutine(SpawnTimer()); //Loops the coroutine
     }
 
     private void Start()
     {
         StartCoroutine(SpawnTimer());
     }
-
 }
