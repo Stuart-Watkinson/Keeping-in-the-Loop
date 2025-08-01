@@ -5,6 +5,7 @@ public class SelectableController : MonoBehaviour
 {
     [SerializeField] private TextSO[] m_textSOArray;
     private TextSO m_currentText;
+    [HideInInspector] public bool m_selected = false;
 
     private void Start()
     {
@@ -12,8 +13,18 @@ public class SelectableController : MonoBehaviour
         this.gameObject.GetComponent<TMP_Text>().text = m_currentText.m_text;
     }
 
-    public void OnSelected()
+    public bool OnSelected()
     {
-
+        m_selected = true;
+        if (m_currentText.m_awardedScore > 0)
+        {
+            Destroy(this.gameObject, 1.0f);
+            return true;
+        }
+        else
+        {
+            Destroy(this.gameObject, 1.0f);
+            return false;
+        }
     }
 }

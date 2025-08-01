@@ -1,33 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseController : MonoBehaviour
 {
     private GameObject m_currentSelected;
+    [SerializeField] LayerMask m_selectLayer;
     private Color m_defaultColour;
     [SerializeField] private Color m_selectedColour;
-    //private GameObject m_mouse;
-    [SerializeField] LayerMask m_selectLayer;
+    private InputAction m_selectAction;
+    private TMP_Text m_currentRender;
 
-    //private void Start()
-    //{
-    //    //m_mouse = this.gameObject;
-    //}
+    private void Awake()
+    {
+        m_selectAction = InputSystem.actions.FindAction("Click");
+        m_selectAction.performed += OnSelect;
+    }
 
     private void FixedUpdate()
     {
-        //m_mouse.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         RaycastHit2D hitText = Physics2D.Raycast((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.down, 1.0f, m_selectLayer);
-
-        Debug.DrawRay((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.down, m_selectedColour, 0.1f);
 
         if (hitText)
         {
-            if (m_currentSelected != null)
-            {
-                m_currentSelected.GetComponent<TMP_Text>().color = m_defaultColour;
-            }
             HoverText(hitText.transform.gameObject);
         }
         else
@@ -42,11 +37,39 @@ public class MouseController : MonoBehaviour
 
     private void HoverText(GameObject hoverObject)
     {
-        m_currentSelected = hoverObject;
-        if (m_defaultColour != m_currentSelected.GetComponent<TMP_Text>().color)
+        if (!hoverObject.GetComponent<SelectableController>().m_selected)
         {
-            m_defaultColour = m_currentSelected.GetComponent<TMP_Text>().color;
+            if (m_currentSelected != null)
+            {
+                m_currentSelected.GetComponent<TMP_Text>().color = m_defaultColour;
+            }
+            m_currentSelected = hoverObject;
+            m_currentRender = m_currentSelected.GetComponent<TMP_Text>();
+            if (m_defaultColour != m_currentRender.color)
+            {
+                m_defaultColour = m_currentRender.color;
+            }
+            m_currentRender.color = m_selectedColour;
         }
-        m_currentSelected.GetComponent<TMP_Text>().color = m_selectedColour;
+    }
+
+    /// <summary>
+    /// On interaction displays whether the text was a correct/incorrect answer
+    /// </summary>
+    /// <param name="context"></param>
+    private void OnSelect(InputAction.CallbackContext context)
+    {
+        if (m_currentSelected != null)
+        {
+            if (m_currentSelected.GetComponent<SelectableController>().OnSelected())
+            {
+                m_currentRender.color = Color.green;
+            }
+            else
+            {
+                m_currentRender.color = Color.red;
+            }
+            m_currentSelected = null;
+        }
     }
 }
