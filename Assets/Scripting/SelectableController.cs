@@ -4,8 +4,9 @@ using UnityEngine;
 public class SelectableController : MonoBehaviour
 {
     [SerializeField] private TextSO[] m_textSOArray;
-    private TextSO m_currentText;
+    public TextSO m_currentText;
     [HideInInspector] public bool m_selected = false;
+
 
     private void Start()
     {
@@ -26,5 +27,6 @@ public class SelectableController : MonoBehaviour
             Destroy(this.gameObject, 1.0f);
             return false;
         }
+
     }
 }

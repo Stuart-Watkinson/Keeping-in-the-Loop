@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Color m_selectedColour;
     private InputAction m_selectAction;
     private TMP_Text m_currentRender;
+
+    public event Action<float> m_OnScoreAwarded;
 
     private void Awake()
     {
@@ -61,6 +64,7 @@ public class MouseController : MonoBehaviour
     {
         if (m_currentSelected != null)
         {
+            m_OnScoreAwarded?.Invoke(m_currentSelected.GetComponent<SelectableController>().m_currentText.m_awardedScore);
             if (m_currentSelected.GetComponent<SelectableController>().OnSelected())
             {
                 m_currentRender.color = Color.green;

@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class TextSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] m_text;
+    [SerializeField] private GameObject m_text;
     private Coroutine m_spawnTimer;
     private List<GameObject> m_currentScreenText = new List<GameObject>();
     private int m_timerTest = 0;
@@ -29,7 +29,7 @@ public class TextSpawner : MonoBehaviour
     {
         if (m_timerTest < 10)
         {
-            SpawnText(m_text[Random.Range(0, m_text.Length)]);
+            SpawnText(m_text);
             yield return new WaitForSeconds(1);
             m_timerTest++;
         }
