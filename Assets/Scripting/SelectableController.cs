@@ -7,7 +7,6 @@ public class SelectableController : MonoBehaviour
     public TextSO m_currentText;
     [HideInInspector] public bool m_selected = false;
 
-
     private void Start()
     {
         m_currentText = m_textSOArray[UnityEngine.Random.Range(0, m_textSOArray.Length)];
