@@ -54,6 +54,8 @@ MonoBehaviour:
   m_textSOArray:
   - {fileID: 11400000, guid: e83b76ca3bf465f4dbaff4c01cc99073, type: 2}
   - {fileID: 11400000, guid: 7a56f34309203cb4faa7dddd62145589, type: 2}
+  m_currentText: {fileID: 0}
+  m_selected: 0
 --- !u!23 &3050893409207893218
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -237,5 +239,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.8829947, y: 0.5813953}
+  m_Size: {x: 5, y: 1}
   m_EdgeRadius: 0
