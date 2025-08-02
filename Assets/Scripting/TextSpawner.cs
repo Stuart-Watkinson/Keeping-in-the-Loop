@@ -7,12 +7,34 @@ using UnityEngine;
 /// </summary>
 public class TextSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject m_text;
-    private Coroutine m_spawnTimer;
     private List<GameObject> m_currentScreenText = new List<GameObject>();
-    private int m_timerTest = 0;
     [SerializeField] private Collider2D[] m_colliders;
-    private float m_radius;
+    [SerializeField] private float m_radius = 11;
+    [SerializeField] private GameObject m_text;
+    [SerializeField] private float m_spawnTimer = 0;
+    public IEnumerator m_spawnCoroutine;
+    public bool m_isSpawning;
+    [SerializeField] RoundController m_roundController;
+
+    private void Start()
+    {
+        m_spawnCoroutine = SpawnDuration();
+    }
+
+    public IEnumerator SpawnDuration()
+    {
+        m_isSpawning = true;
+        while (m_spawnTimer < 20)
+        {
+            OnSpawnText(m_text);
+            m_spawnTimer++;
+            yield return new WaitForSeconds(1);
+        }
+        m_spawnTimer = 0;
+        DestroyText();
+        m_isSpawning = false;
+        yield return null;
+    }
 
     private void OnSpawnText(GameObject text)
     {
@@ -22,7 +44,7 @@ public class TextSpawner : MonoBehaviour
 
         while (!spawnSpaceFree)
         {
-            position = new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
+            position = new Vector2(UnityEngine.Random.Range(-5.0f, 5.0f), UnityEngine.Random.Range(-5.0f, 5.0f));
             spawnSpaceFree = PreventSpawnOverlap(position);
 
             if (numBeforeRejection >= 50)
@@ -63,33 +85,11 @@ public class TextSpawner : MonoBehaviour
         return true;
     }
 
-    private void DestroyText()
+    public void DestroyText()
     {
         for (int i = 0; i < m_currentScreenText.Count; i++)
         {
             Destroy(m_currentScreenText[i]);
         }
-    }
-
-    private IEnumerator SpawnTimer()
-    {
-        if (m_timerTest < 10)
-        {
-            OnSpawnText(m_text);
-            yield return new WaitForSeconds(1);
-            m_timerTest++;
-        }
-        else
-        {
-            DestroyText();
-            m_timerTest = 0;
-            m_currentScreenText.Clear();
-        }
-        StartCoroutine(SpawnTimer()); //Loops the coroutine
-    }
-
-    private void Start()
-    {
-        StartCoroutine(SpawnTimer());
     }
 }

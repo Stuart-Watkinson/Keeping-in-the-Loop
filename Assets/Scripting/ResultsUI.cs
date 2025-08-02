@@ -9,7 +9,10 @@ public class ResultsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_payText;
     [SerializeField] private GameObject m_resultsScreen;
     [SerializeField] private ScoreManager m_scoreManager;
-    [SerializeField] private GameObject m_lossText;
+    [SerializeField] private RoundController m_roundController;
+    [SerializeField] private GameObject[] m_resultsText;
+
+    private bool m_won;
 
     private Coroutine m_showResultsDelay;
 
@@ -21,8 +24,10 @@ public class ResultsUI : MonoBehaviour
     private void Start()
     {
         m_resultsScreen.SetActive(false);
-        m_lossText.SetActive(false);
-        //m_showResultsDelay = ResultsDelay();
+        for (int i = 0; i < m_resultsText.Length; i++)
+        {
+            m_resultsText[i].SetActive(false);
+        }
     }
 
     private void ShowResults(float quota, float endRevenue)
@@ -32,21 +37,18 @@ public class ResultsUI : MonoBehaviour
         m_revenueText.text = endRevenue.ToString();
         m_payText.text = (endRevenue - quota).ToString();
 
-        if ((endRevenue - quota) < 0)
-        {
-            OnLoss();
-        }
+        int result = (endRevenue - quota < 0) ? WinOrLose(1) : WinOrLose(0);
     }
 
-    private IEnumerator ResultsDelay()
+    private IEnumerator ResultsDelay(int result)
     {
         yield return new WaitForSeconds(1.5f);
-        m_lossText.SetActive(true);
+        m_resultsText[result].SetActive(true);
     }
 
-    private void OnLoss()
+    private int WinOrLose(int results)
     {
-        StartCoroutine(ResultsDelay());
-
+        StartCoroutine(ResultsDelay(results));
+        return results;
     }
 }
