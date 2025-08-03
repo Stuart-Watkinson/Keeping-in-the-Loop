@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f80e64875f45ad4495e2ca73ee22f7a, type: 3}
   m_Name: WrongText
   m_EditorClassIdentifier: 
-  m_text: Wrong
-  m_isSelected: 0
+  m_text:
+  - Aliens
+  - Screaming
+  - Explosions
+  - Toasted
+  - Zombies
+  - BANG!
+  - Um....
+  - 'Looping '
+  - 'Burny '
+  - 'Jitter '
+  - 'Smoked '
+  - 'Sparkle '
+  - 'Panic!!  '
   m_awardedScore: -10

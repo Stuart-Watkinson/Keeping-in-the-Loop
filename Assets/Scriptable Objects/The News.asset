@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f80e64875f45ad4495e2ca73ee22f7a, type: 3}
+  m_Name: The News
+  m_EditorClassIdentifier: 
+  m_text:
+  - Good Evening!
+  - 'We begin tonight with a major developing story: a sudden and widespread power
+    outage left much of the city in darkness late last night.'
+  - The blackout began shortly after 10 PM, affecting traffic systems, hospitals,
+    and thousands of homes. More than 14,000 residents were without electricity for
+    hours.
+  - Officials believe the outage was caused by a blown transformer in the downtown
+    core, possibly due to surging demand from extreme heat.
+  - "The city\u2019s backup generators kicked in for critical infrastructure, but
+    many neighborhoods remained without power until early morning."
+  - "One bright spot emerged from the night, quite literally \u2014 a local caf\xE9
+    owner, Tara Nguyen, stayed open using battery-powered lanterns and a camping
+    stove."
+  - "She served free drinks and allowed people to charge phones and devices, turning
+    her caf\xE9 into a community hub during the blackout."
+  - "Social media quickly praised her actions, with neighbors calling her \u201Ca
+    light in the dark."
+  - "City officials say they plan to formally recognize Nguyen at next week\u2019s
+    council meeting."
+  - As of this evening, power has been fully restored across the grid, and investigations
+    into the root cause are still underway.
+  - "We\u2019ll continue to bring you updates as more information becomes available."
+  - For now, stay safe, stay cool, and thank you for joining us tonight.
+  m_awardedScore: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResultsUI : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ResultsUI : MonoBehaviour
     [SerializeField] private ScoreManager m_scoreManager;
     [SerializeField] private RoundController m_roundController;
     [SerializeField] private GameObject[] m_resultsText;
+    [SerializeField] private GameObject m_retryButton;
 
     private bool m_won;
 
@@ -28,6 +30,7 @@ public class ResultsUI : MonoBehaviour
         {
             m_resultsText[i].SetActive(false);
         }
+        m_retryButton.SetActive(false);
     }
 
     private void ShowResults(float quota, float endRevenue)
@@ -44,11 +47,17 @@ public class ResultsUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         m_resultsText[result].SetActive(true);
+        m_retryButton.SetActive(true);
     }
 
     private int WinOrLose(int results)
     {
         StartCoroutine(ResultsDelay(results));
         return results;
+    }
+
+    public void OnRetry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

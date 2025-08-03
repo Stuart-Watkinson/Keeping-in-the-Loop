@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f80e64875f45ad4495e2ca73ee22f7a, type: 3}
   m_Name: CorrectText
   m_EditorClassIdentifier: 
-  m_text: Correct
-  m_isSelected: 0
+  m_text:
+  - Outage
+  - Officials
+  - Emergency
+  - Response
+  - Blackout
+  - Downtown
+  - Update
+  - Crews
+  - Safety
+  - Restore
+  - Alert
+  - Alert
+  - Report
   m_awardedScore: 10
