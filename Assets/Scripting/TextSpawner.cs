@@ -15,6 +15,7 @@ public class TextSpawner : MonoBehaviour
     public IEnumerator m_spawnCoroutine;
     public bool m_isSpawning;
     [SerializeField] RoundController m_roundController;
+    [SerializeField] private NewsPromptUI m_newsPromptUI;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class TextSpawner : MonoBehaviour
 
     public IEnumerator SpawnDuration()
     {
+        StopCoroutine(m_newsPromptUI.NewsPrompts());
         m_isSpawning = true;
         while (m_spawnTimer < 20)
         {
@@ -33,6 +35,8 @@ public class TextSpawner : MonoBehaviour
         m_spawnTimer = 0;
         DestroyText();
         m_isSpawning = false;
+        m_roundController.m_staticScreen.enabled = false;
+        StartCoroutine(m_newsPromptUI.NewsPrompts());
     }
 
     private void OnSpawnText(GameObject text)

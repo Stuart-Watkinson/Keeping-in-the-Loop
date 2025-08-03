@@ -11,8 +11,9 @@ public class ResultsUI : MonoBehaviour
     [SerializeField] private GameObject m_resultsScreen;
     [SerializeField] private ScoreManager m_scoreManager;
     [SerializeField] private RoundController m_roundController;
-    [SerializeField] private GameObject[] m_resultsText;
+    [SerializeField] private TMP_Text[] m_resultsText;
     [SerializeField] private GameObject m_retryButton;
+    [SerializeField] private MouseController m_mouseControler;
 
     private bool m_won;
 
@@ -25,10 +26,11 @@ public class ResultsUI : MonoBehaviour
 
     private void Start()
     {
+        m_mouseControler.enabled = true;
         m_resultsScreen.SetActive(false);
         for (int i = 0; i < m_resultsText.Length; i++)
         {
-            m_resultsText[i].SetActive(false);
+            m_resultsText[i].enabled = false;
         }
         m_retryButton.SetActive(false);
     }
@@ -45,8 +47,9 @@ public class ResultsUI : MonoBehaviour
 
     private IEnumerator ResultsDelay(int result)
     {
+        m_mouseControler.enabled = false;
         yield return new WaitForSeconds(1.5f);
-        m_resultsText[result].SetActive(true);
+        m_resultsText[result].enabled = true;
         m_retryButton.SetActive(true);
     }
 

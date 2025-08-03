@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoundController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class RoundController : MonoBehaviour
     private int m_currentRound;
     private float m_roundChanceIncrease;
     private float m_timeBetweenChecks;
+    [SerializeField] public Image m_staticScreen;
+
 
     public event Action<bool> m_endOfRound;
 
@@ -23,6 +26,7 @@ public class RoundController : MonoBehaviour
         m_currentChanceDefault = m_staticChance;
         m_roundChanceIncrease = (float)(0.1 * m_currentRound + 1);
         m_staticChance = 10 + m_roundChanceIncrease;
+        m_staticScreen.enabled = false;
     }
     private void OnStatic()
     {
@@ -62,7 +66,10 @@ public class RoundController : MonoBehaviour
             {
                 m_timerRunning = false;
                 m_staticChance = m_currentChanceDefault;
+
                 OnStatic();
+                m_staticScreen.enabled = true;
+
             }
             if (m_roundTimer >= m_roundLength)
             {
