@@ -33,7 +33,6 @@ public class TextSpawner : MonoBehaviour
         m_spawnTimer = 0;
         DestroyText();
         m_isSpawning = false;
-        yield return null;
     }
 
     private void OnSpawnText(GameObject text)

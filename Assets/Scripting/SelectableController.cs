@@ -10,7 +10,7 @@ public class SelectableController : MonoBehaviour
     private void Start()
     {
         m_currentText = m_textSOArray[UnityEngine.Random.Range(0, m_textSOArray.Length)];
-        this.gameObject.GetComponent<TMP_Text>().text = m_currentText.m_text;
+        this.gameObject.GetComponent<TMP_Text>().text = m_currentText.m_text[Random.Range(0, m_currentText.m_text.Length)];
     }
 
     public bool OnSelected()

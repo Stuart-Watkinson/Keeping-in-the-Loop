@@ -26,12 +26,19 @@ public class RoundController : MonoBehaviour
     }
     private void OnStatic()
     {
-        if (!m_textSpawner.m_isSpawning)
+        while (!m_timerRunning)
         {
-            m_textSpawner.StartCoroutine(m_textSpawner.m_spawnCoroutine);
+            if (!m_textSpawner.m_isSpawning)
+            {
+                m_timerRunning = false;
+                m_textSpawner.StartCoroutine(m_textSpawner.m_spawnCoroutine);
+            }
+            else
+            {
+                m_textSpawner.m_spawnCoroutine = m_textSpawner.SpawnDuration();
+                m_timerRunning = true;
+            }
         }
-        m_textSpawner.m_spawnCoroutine = m_textSpawner.SpawnDuration();
-        m_timerRunning = true;
     }
 
     private void OnRoundEnd(float quota, float endRevenue)

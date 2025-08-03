@@ -1282,6 +1282,8 @@ MonoBehaviour:
   m_colliders: []
   m_radius: 11
   m_text: {fileID: 4170911585736625087, guid: ae1c915d181b4b54aae2aea7bf6978fa, type: 3}
+  m_spawnTimer: 0
+  m_isSpawning: 0
   m_roundController: {fileID: 591653895}
 --- !u!4 &591653892
 Transform:
@@ -1351,7 +1353,7 @@ MonoBehaviour:
   m_roundTimer: 0
   m_textSpawner: {fileID: 591653891}
   m_timerRunning: 1
-  m_staticChance: 50
+  m_staticChance: 10
 --- !u!1 &758860338
 GameObject:
   m_ObjectHideFlags: 0
